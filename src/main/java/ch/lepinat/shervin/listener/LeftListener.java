@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class LeftListener implements Listener {
 
     @EventHandler
-    public void onPlayerleft(PlayerQuitEvent e) {
+    public void onPlayerLeft(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         String name = p.getName();
         e.quitMessage(Component.text("§c- §7" + name));

@@ -1,6 +1,5 @@
 package ch.lepinat.shervin.commands;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,16 +7,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
-public class resetnameCMD implements CommandExecutor {
+public class ResetName implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] arg) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (!p.getInventory().getItemInMainHand().getItemMeta().displayName().toString().equals("")) {
                 if (!p.getInventory().getItemInMainHand().getType().isAir()) {
                     if (p.getInventory().contains(Material.EMERALD, 2) || p.getUniqueId().toString().equals("1378f00d-6a2a-45cb-8de9-56623f10be2a")) {
-                        if (arg.length == 0) {
+                        if (args.length == 0) {
                             ItemStack Item = new ItemStack(p.getInventory().getItemInMainHand());
                             ItemMeta ItemMeta = Item.getItemMeta();
                             ItemMeta.setDisplayName("");

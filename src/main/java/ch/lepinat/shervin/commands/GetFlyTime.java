@@ -10,13 +10,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class flytimeCMD implements CommandExecutor {
+public class GetFlyTime implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (args.length == 0) {
-                if (SoupListener.flying.contains(p.getUniqueId())) {
+                if (SoupListener.flyingPlayers.containsKey(p.getUniqueId().toString())) {
                     try {
                         p.sendMessage("§aDu kannst noch " + TimeFormatter.format(Config.getTimer(p.getUniqueId()), 'a') + " §afliegen§7.");
                     } catch (LeftException | isNullException e) {
@@ -29,7 +30,7 @@ public class flytimeCMD implements CommandExecutor {
                 Player t;
                 if ((t = Bukkit.getPlayer(args[0])) != null) {
                     try {
-                        if (SoupListener.flying.contains(t.getUniqueId())) {
+                        if (SoupListener.flyingPlayers.containsKey(t.getUniqueId().toString())) {
                             p.sendMessage("§aDer Spieler §6" + t.getName() + " §akann noch §6" + TimeFormatter.format(Config.getTimer(t.getUniqueId()), 'a') + " §afliegen§7.");
                         } else {
                             p.sendMessage("§cDer Spieler §l" + t.getName() + " §cist gerade nicht am fliegen§7.");
