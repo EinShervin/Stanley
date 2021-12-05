@@ -1,0 +1,46 @@
+name: Stanley
+version: 1.0
+author: Shervin Stanley Lepinat
+prefix: Stanley
+main: ch.lepinat.shervin.main.Main
+api-version: 1.18
+
+commands:
+   gm:
+      description: den Gamemode wechseln.
+   cc:
+      description: Chat leeren.
+   heal:
+      description: dich heilen.
+   fly:
+      description: kannst du fliegen.
+   setname:
+      description: Namen eines Items aendern.
+   resetname:
+      description: Namen deines Items zuruecksetzen.
+   flyspeed:
+      description: Schnell und so.
+   getflyspeed:
+      description: wissen wie schnell deggah.
+   enchantall:
+      description: ok
+   author:
+      description: ok
+   openinv:
+      description: ok
+   flytime:
+      description: Flytime du Idiot
+   getflysoup:
+      description: ok
+   getchair:
+      description: ok
+   head:
+      description: bekommen kopf
+   gethead:
+      description: ok
+   stats:
+      description: nothing du huansohn
+   repair:
+      description: ok
+   burn:
+      description: datapack ersatz du hurensohn
