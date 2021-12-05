@@ -13,8 +13,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import ch.lepinat.shervin.crafting.FlySoup;
-import ch.lepinat.shervin.crafting.Head;
-import ch.lepinat.shervin.crafting.KnockbackStick;
+import ch.lepinat.shervin.crafting.KnockBackStick;
 
 public class Main extends JavaPlugin {
 
@@ -30,8 +29,8 @@ public class Main extends JavaPlugin {
         }
         saveDefaultConfig();
 
-        new KnockbackStick().registerRecipes();
-        new Head().registerRecipes();
+        new KnockBackStick().registerRecipes();
+        new ch.lepinat.shervin.crafting.Head().registerRecipes();
         new FlySoup().registerRecipes();
         new ChairRecipe().registerRecipes();
 
@@ -44,25 +43,25 @@ public class Main extends JavaPlugin {
             }
         }
 
-        getCommand("gm").setExecutor(new gamemodeCMD());
-        getCommand("cc").setExecutor(new ccCMD());
-        getCommand("heal").setExecutor(new HealCMD());
-        getCommand("fly").setExecutor(new FlyCMD());
-        getCommand("setname").setExecutor(new DisplaynameCMD());
-        getCommand("resetname").setExecutor(new resetnameCMD());
-        getCommand("flyspeed").setExecutor(new FlyspeedCMD());
-        getCommand("getflyspeed").setExecutor(new getflyspeedCMD());
-        getCommand("enchantall").setExecutor(new EnchantAllCMD());
-        getCommand("author").setExecutor(new ChangeAuthorCMD());
-        getCommand("openinv").setExecutor(new OpenInventoryCMD());
-        getCommand("flytime").setExecutor(new flytimeCMD());
-        getCommand("getflysoup").setExecutor(new getFlySoupCMD());
-        getCommand("getchair").setExecutor(new getChairCMD());
-        getCommand("head").setExecutor(new HeadCMD());
-        getCommand("gethead").setExecutor(new getHeadCMD());
-        getCommand("stats").setExecutor(new StatsCMD());
-        getCommand("repair").setExecutor(new RepairCMD());
-        getCommand("burn").setExecutor(new burnCommand());
+        getCommand("gm").setExecutor(new gameMode());
+        getCommand("cc").setExecutor(new ClearChat());
+        getCommand("heal").setExecutor(new Heal());
+        getCommand("fly").setExecutor(new Fly());
+        getCommand("setname").setExecutor(new SetItemName());
+        getCommand("resetname").setExecutor(new ResetName());
+        getCommand("flyspeed").setExecutor(new FlySpeed());
+        getCommand("getflyspeed").setExecutor(new GetFlySpeed());
+        getCommand("enchantall").setExecutor(new EnchantAll());
+        getCommand("author").setExecutor(new ChangeAuthor());
+        getCommand("openinv").setExecutor(new OpenInventory());
+        getCommand("flytime").setExecutor(new GetFlyTime());
+        getCommand("getflysoup").setExecutor(new GetFlySoup());
+        getCommand("getchair").setExecutor(new GetChair());
+        getCommand("head").setExecutor(new Head());
+        getCommand("gethead").setExecutor(new GetHead());
+        getCommand("stats").setExecutor(new Stats());
+        getCommand("repair").setExecutor(new Repair());
+        getCommand("burn").setExecutor(new Burn());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);

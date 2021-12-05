@@ -1,6 +1,6 @@
 package ch.lepinat.shervin.listener;
 
-import ch.lepinat.shervin.crafting.ChairRecipe;
+import ch.lepinat.shervin.helper.Items;
 import ch.lepinat.shervin.main.Config;
 import ch.lepinat.shervin.main.Main;
 import net.kyori.adventure.text.Component;
@@ -33,9 +33,9 @@ public class SittingListener implements Listener {
 
     @EventHandler
     public void spawnegg(PlayerInteractEvent e) {
-        if (e.getItem() != null && e.getItem().isSimilar(ChairRecipe.getChair())) {
+        if (e.getItem() != null && e.getItem().isSimilar(Items.getChair())) {
             if (e.getClickedBlock() != null && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                if (ChairRecipe.getMaterials().containsValue(e.getClickedBlock().getType())) {
+                if (Items.getChairMaterials().containsValue(e.getClickedBlock().getType())) {
                     try {
                         Config.setChairLocation(e.getClickedBlock().getLocation(), e.getPlayer().getUniqueId());
                     } catch (IOException ioException) {
@@ -57,7 +57,7 @@ public class SittingListener implements Listener {
         if (e.getClickedBlock() != null && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             Block block = e.getClickedBlock();
             if (!e.getPlayer().isSneaking()) {
-                if (ChairRecipe.getMaterials().containsValue(block.getType())) {
+                if (Items.getChairMaterials().containsValue(block.getType())) {
                     if (Config.getChairLocation(block.getLocation())) {
                         Player p = e.getPlayer();
                         if (!lock.contains(block.getLocation())) {
@@ -98,7 +98,7 @@ public class SittingListener implements Listener {
 
     @EventHandler
     public void breakblock(BlockBreakEvent e) {
-        if (ChairRecipe.getMaterials().containsValue(e.getBlock().getType())) {
+        if (Items.getChairMaterials().containsValue(e.getBlock().getType())) {
             if (Config.getChairLocation(e.getBlock().getLocation())) {
                 if (!chairs.isEmpty()) {
                     if (chairs.containsKey(e.getBlock().getLocation()) && Bukkit.getPlayer(chairs.get(e.getBlock().getLocation())).getLocation().getBlock()
@@ -111,7 +111,7 @@ public class SittingListener implements Listener {
                             e.getPlayer().sendMessage("§cFEHLER");
                         }
                         chairs.remove(e.getBlock().getLocation());
-                        e.getPlayer().getInventory().addItem(ChairRecipe.getChair());
+                        e.getPlayer().getInventory().addItem(Items.getChair());
                     }
                 } else {
                     try {
@@ -119,7 +119,7 @@ public class SittingListener implements Listener {
                     } catch (IOException ioException) {
                         e.getPlayer().sendMessage("§cFEHLER");
                     }
-                    e.getPlayer().getInventory().addItem(ChairRecipe.getChair());
+                    e.getPlayer().getInventory().addItem(Items.getChair());
                 }
             }
         }

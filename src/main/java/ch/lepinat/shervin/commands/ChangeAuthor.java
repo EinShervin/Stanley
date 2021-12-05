@@ -8,10 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
-public class ChangeAuthorCMD implements CommandExecutor {
+public class ChangeAuthor implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (!p.getInventory().getItemInMainHand().getType().isAir()) {
                 if (p.getInventory().getItemInMainHand().getType() == Material.WRITTEN_BOOK) {

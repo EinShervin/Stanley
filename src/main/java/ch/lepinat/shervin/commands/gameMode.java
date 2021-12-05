@@ -6,18 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class gamemodeCMD implements CommandExecutor {
+public class gameMode implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command arg1, String label, String[] arg) {
-
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (p.hasPermission("stanley.creative")) {
-                if (arg.length == 1) {
+                if (args.length == 1) {
                     int number;
                     try {
-                        number = Integer.parseInt(arg[0]);
+                        number = Integer.parseInt(args[0]);
                     } catch (NumberFormatException ex) {
                         p.sendMessage("§cVallah kein Zahl§7, §ckannst du nichtmal schreiben ODER WAS§7.");
                         return false;
@@ -37,12 +37,12 @@ public class gamemodeCMD implements CommandExecutor {
                     } else {
                         p.sendMessage("§cBitte gebe eine Zahl von §b0-3 §cein§7.");
                     }
-                } else if (arg.length == 2) {
-                    Player t = Bukkit.getPlayer(arg[1]);
+                } else if (args.length == 2) {
+                    Player t = Bukkit.getPlayer(args[1]);
                     if (t != null) {
                         int number;
                         try {
-                            number = Integer.parseInt(arg[0]);
+                            number = Integer.parseInt(args[0]);
                         } catch (NumberFormatException ex) {
                             p.sendMessage("§cVallah kein Zahl§7, §ckannst du nichtmal schreiben ODER WAS§7.");
                             return false;
@@ -67,7 +67,7 @@ public class gamemodeCMD implements CommandExecutor {
                             p.sendMessage("§cBitte gebe eine Zahl von §b0-3 §cein§7.");
                         }
                     } else {
-                        p.sendMessage("§cDer Spieler §7§l" + arg[1] + " §cist nicht auf diesem Server Online§7.");
+                        p.sendMessage("§cDer Spieler §7§l" + args[1] + " §cist nicht auf diesem Server Online§7.");
                     }
                 } else {
                     p.sendMessage("§cBitte gebe eine Zahl von §b0-3 §cein§7.");

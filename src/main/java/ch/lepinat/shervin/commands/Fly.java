@@ -8,14 +8,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ch.lepinat.shervin.listener.SoupListener;
+import org.jetbrains.annotations.NotNull;
 
-public class FlyCMD implements CommandExecutor {
+public class Fly implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] arg) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (p.hasPermission("stanley.fly")) {
-                if (arg.length == 0) {
+                if (args.length == 0) {
                     if (p.getAllowFlight()) {
                         p.setAllowFlight(false);
                         p.setFlying(false);
@@ -25,9 +26,9 @@ public class FlyCMD implements CommandExecutor {
                         p.setFlying(true);
                         p.sendMessage("§aDu kannst nun fliegen§7.");
                     }
-                } else if (arg.length == 1) {
-                    if (Bukkit.getPlayer(arg[0]) != null) {
-                        Player t = Bukkit.getPlayer(arg[0]);
+                } else if (args.length == 1) {
+                    if (Bukkit.getPlayer(args[0]) != null) {
+                        Player t = Bukkit.getPlayer(args[0]);
                         if (t.getAllowFlight()) {
                             t.setAllowFlight(false);
                             t.setFlying(false);
@@ -40,14 +41,14 @@ public class FlyCMD implements CommandExecutor {
                             p.sendMessage("§aDu hast §b" + t.getName() + " §afliegen beigebracht§7.");
                         }
                     } else {
-                        p.sendMessage("§cDer Spieler §7§l" + arg[0] + " §cist nicht auf diesem Server Online§7.");
+                        p.sendMessage("§cDer Spieler §7§l" + args[0] + " §cist nicht auf diesem Server Online§7.");
                     }
-                } else if (arg.length == 2) {
+                } else if (args.length == 2) {
                     Player t;
-                    if ((t = Bukkit.getPlayer(arg[0])) != null) {
+                    if ((t = Bukkit.getPlayer(args[0])) != null) {
                         int number;
                         try {
-                            number = Integer.parseInt(arg[1]);
+                            number = Integer.parseInt(args[1]);
                         } catch (NumberFormatException ex) {
                             p.sendMessage("§cKein Zahl§7.");
                             return false;
@@ -63,7 +64,7 @@ public class FlyCMD implements CommandExecutor {
                             p.sendMessage("§cgib mal was richtiges ein. lost du kek");
                         }
                     } else {
-                        p.sendMessage("§cDer Spieler §7§l" + arg[0] + " §cist nicht auf diesem Server Online§7.");
+                        p.sendMessage("§cDer Spieler §7§l" + args[0] + " §cist nicht auf diesem Server Online§7.");
                     }
                 } else {
                     p.sendMessage("§cgib mal was richtiges ein. lost du kedddk");

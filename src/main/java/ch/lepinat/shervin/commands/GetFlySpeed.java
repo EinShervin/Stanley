@@ -5,21 +5,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class getflyspeedCMD implements CommandExecutor {
+public class GetFlySpeed implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] arg) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (p.hasPermission("Stanley.getspeed")) {
-                if (arg.length == 0) {
+                if (args.length == 0) {
                     p.sendMessage("§aDu hast einen Flyspeed von §6" + Math.round(p.getFlySpeed() * 10) + "§7.");
-                } else if (arg.length == 1) {
-                    Player t = Bukkit.getPlayer(arg[0]);
+                } else if (args.length == 1) {
+                    Player t = Bukkit.getPlayer(args[0]);
                     if (t != null) {
                         p.sendMessage("§6" + t.getName() + " §ahat einen Flyspeed von §6" + Math.round(t.getFlySpeed() * 10) + "§7.");
                     } else {
-                        p.sendMessage("§cDer Spieler §7§l" + arg[0] + " §cist nicht auf diesem Server Online§7.");
+                        p.sendMessage("§cDer Spieler §7§l" + args[0] + " §cist nicht auf diesem Server Online§7.");
                     }
                 } else {
                     p.sendMessage("§cgib mal was richtiges ein. lost du kek");
@@ -30,8 +31,6 @@ public class getflyspeedCMD implements CommandExecutor {
         } else {
             sender.sendMessage("§cDu musst ein §bSpieler §csein um diesen Command zu benutzen§7.");
         }
-
         return false;
     }
-
 }

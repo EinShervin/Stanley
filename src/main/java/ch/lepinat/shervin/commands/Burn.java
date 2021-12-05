@@ -7,13 +7,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.HashMap;
 
-public class burnCommand implements CommandExecutor {
+public class Burn implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (!p.getInventory().isEmpty()) {
                 PlayerInventory inventory = p.getInventory();
@@ -37,8 +38,7 @@ public class burnCommand implements CommandExecutor {
                 }};
 
                 for (ItemStack itemStack : Arrays.stream(p.getInventory().getContents())
-                        .filter(itemStack -> itemStack != null && concreteTypes.containsKey(itemStack.getType()))
-                        .collect(Collectors.toList())) {
+                    .filter(itemStack -> itemStack != null && concreteTypes.containsKey(itemStack.getType())).toList()) {
                     inventory.remove(itemStack);
                     itemStack.setType(concreteTypes.get(itemStack.getType()));
                     inventory.addItem(itemStack);

@@ -6,15 +6,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class ccCMD implements CommandExecutor {
+public class ClearChat implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] zusatz) {
-
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
             if (p.hasPermission("Stanley.cc")) {
-                if (zusatz.length == 0) {
+                if (args.length == 0) {
                     for (int i = 0; i <= 100; i++) {
                         Bukkit.broadcast(Component.text(" "));
                     }
@@ -26,8 +26,6 @@ public class ccCMD implements CommandExecutor {
                 p.sendMessage("§cDazu hast du keine Rechte§7!");
             }
         }
-
         return false;
     }
-
 }
