@@ -23,7 +23,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class SoupListener implements Listener {
-
+    
     private int taskID1;
     private int taskID2;
 
@@ -33,9 +33,9 @@ public class SoupListener implements Listener {
 
         if (!flying.contains(p.getUniqueId())) flying.add(p.getUniqueId());
 
-        long starttime;
+        long startTime;
         try {
-            starttime = Config.setTimer(p.getUniqueId(), timer);
+            startTime = Config.setTimer(p.getUniqueId(), timer);
         } catch (IOException e) {
             p.sendMessage("§cFehler§7.");
             return;
@@ -55,16 +55,8 @@ public class SoupListener implements Listener {
                     p.setFlying(false);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 25, 1));
                     countdown = -1;
-                } else if (countdown == 60) {
-                    p.sendMessage("§cDu kannst nur noch §660 Sekunden §cfliegen§7.");
-                } else if (countdown == 30) {
-                    p.sendMessage("§cDu kannst nur noch §630 Sekunden §cfliegen§7.");
-                } else if (countdown == 3) {
-                    p.sendMessage("§cDu kannst nur noch §63 Sekunden §cfliegen§7.");
-                } else if (countdown == 2) {
-                    p.sendMessage("§cDu kannst nur noch §62 Sekunden §cfliegen§7.");
-                } else if (countdown == 1) {
-                    p.sendMessage("§cDu kannst nur noch §61 Sekunden §cfliegen§7.");
+                } else if (countdown == 60 || countdown == 30 || countdown == 3 || countdown == 2 ||countdown == 1) {
+                    p.sendMessage("§cDu kannst nur noch §6" + countdown + " Sekunden §cfliegen§7.");
                 }
                 if (countdown == -1) {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 25, 1));
@@ -85,7 +77,7 @@ public class SoupListener implements Listener {
         }, 0, 20);
 
         taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), () -> {
-            if ((Config.getstarttime(p.getUniqueId())) != starttime) {
+            if ((Config.getstarttime(p.getUniqueId())) != startTime) {
                 stop();
             }
         }, 40, 50);
@@ -97,7 +89,7 @@ public class SoupListener implements Listener {
     }
 
     @EventHandler
-    public void onSoupdrinking(PlayerItemConsumeEvent e) {
+    public void onSoupDrinking(PlayerItemConsumeEvent e) {
         if (e.getItem().isSimilar(getFlySoup())) {
             Player p = e.getPlayer();
             if (flying.contains(p.getUniqueId())) {
