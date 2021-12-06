@@ -1,8 +1,5 @@
 package ch.lepinat.shervin.listener;
 
-import ch.lepinat.shervin.exceptions.LeftException;
-import ch.lepinat.shervin.exceptions.isNullException;
-import ch.lepinat.shervin.main.Config;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,9 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.io.*;
 import java.time.Instant;
-import java.util.Date;
 
 public class JoinListener implements Listener {
 
@@ -32,29 +27,7 @@ public class JoinListener implements Listener {
     }
 
     private void flySoup(Player p) {
-        long timer;
-        try {
-            timer = Config.getTimer(p.getUniqueId());
-        } catch (isNullException exception) {
-            return;
-        } catch (LeftException exception) {
-            SoupListener soupListener = new SoupListener();
-            soupListener.flugTimer(p, 0);
-            return;
-        }
-        if (timer > 0) {
-            SoupListener soupListener = new SoupListener();
-            try {
-                soupListener.flugTimer(p, (Config.getTimer(p.getUniqueId()) + new Date(Instant.now().getEpochSecond()).getTime()) / 1000);
-            } catch (LeftException | isNullException leftException) {
-                leftException.printStackTrace();
-            }
-        } else {
-            try {
-                Config.removeTimer(p.getUniqueId());
-            } catch (IOException ioException) {
-                p.sendMessage("§cdu huansohn");
-            }
-        }
+        System.out.println(SoupListener.flyingPlayers.get(p.getUniqueId().toString()).getTimer());
+        System.out.println(Instant.now().toEpochMilli());
     }
 }

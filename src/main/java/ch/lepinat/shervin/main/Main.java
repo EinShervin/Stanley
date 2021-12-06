@@ -36,10 +36,10 @@ public class Main extends JavaPlugin {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             try {
-                long timer = Config.getTimer(p.getUniqueId());
+                long timer = Config.getTimer(p.getUniqueId().toString());
                 SoupListener soupListener = new SoupListener();
                 soupListener.flugTimer(p, timer / 1000);
-            } catch (LeftException | isNullException ignored) {
+            } catch (Exception ignored) {
             }
         }
 

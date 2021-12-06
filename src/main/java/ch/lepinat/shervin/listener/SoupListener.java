@@ -1,9 +1,7 @@
 package ch.lepinat.shervin.listener;
 
-import ch.lepinat.shervin.exceptions.LeftException;
-import ch.lepinat.shervin.exceptions.isNullException;
+import ch.lepinat.shervin.helper.Info;
 import ch.lepinat.shervin.helper.Items;
-import ch.lepinat.shervin.main.Config;
 import ch.lepinat.shervin.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,34 +11,39 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class SoupListener implements Listener {
 
-    private int taskID1;
-
-    public static HashMap<String, Integer> flyingPlayers = new HashMap<>();
+    private int taskId;
+    public static final HashMap<String, Info> flyingPlayers = new HashMap<>();
 
     public void flugTimer(Player p, long timer) {
 
-        long startTime;
-        try {
-            startTime = Config.setTimer(p.getUniqueId(), timer);
-        } catch (IOException e) {
-            p.sendMessage("§cFehler§7.");
-            return;
-        }
         p.setAllowFlight(true);
         p.setFlying(true);
-        taskID1 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
-            long countdown = timer;
+
+        taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
+            long countdown;
+            long finalTimer = timer;
+
+            private void handlePlayerList(String uuid, int taskId) {
+                Info info;
+                if ((info = flyingPlayers.get(uuid)) != null) {
+                    Bukkit.getScheduler().cancelTask(flyingPlayers.get(uuid).getTaskId());
+                    finalTimer += info.getTimer() / 1000;
+                    flyingPlayers.remove(uuid);
+                }
+                flyingPlayers.put(uuid, new Info(taskId, timer));
+                countdown = finalTimer;
+            }
 
             @Override
             public void run() {
+                if (countdown == finalTimer) {
+                    handlePlayerList(p.getUniqueId().toString(), taskId);
+                }
                 if (countdown == 0) {
-                    flyingPlayers.remove(p.getUniqueId());
-
                     p.sendMessage("§cDu kannst nicht mehr fliegen§7.");
                     p.setAllowFlight(false);
                     p.setFlying(false);
@@ -53,13 +56,9 @@ public class SoupListener implements Listener {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 25, 1));
                     if (p.isOnGround() || p.isSwimming() || p.isGliding() || p.isSleeping() || p.isInsideVehicle()) {
                         p.removePotionEffect(PotionEffectType.SLOW_FALLING);
-                        try {
-                            Config.removeTimer(p.getUniqueId());
-                        } catch (IOException e) {
-                            p.sendMessage("§cFehler§7.");
-                        } finally {
-                            Bukkit.getScheduler().cancelTask(taskID1);
-                        }
+
+                        flyingPlayers.remove(p.getUniqueId().toString());
+                        Bukkit.getScheduler().cancelTask(taskId);
                     }
                 } else {
                     countdown--;
@@ -72,15 +71,7 @@ public class SoupListener implements Listener {
     public void onSoupDrinking(PlayerItemConsumeEvent e) {
         if (e.getItem().isSimilar(Items.getFlySoup())) {
             Player p = e.getPlayer();
-            if (flyingPlayers.containsKey(p.getUniqueId().toString())) {
-                try {
-                    flugTimer(p, Config.getTimer(p.getUniqueId()) / 1000 + 1800);
-                } catch (LeftException | isNullException exception) {
-                    exception.printStackTrace();
-                }
-            } else {
-                flugTimer(p, 1800);
-            }
+            flugTimer(p, 1800);
         }
     }
 }

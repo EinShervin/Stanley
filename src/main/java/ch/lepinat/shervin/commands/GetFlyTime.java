@@ -1,9 +1,6 @@
 package ch.lepinat.shervin.commands;
 
-import ch.lepinat.shervin.exceptions.LeftException;
-import ch.lepinat.shervin.exceptions.isNullException;
 import ch.lepinat.shervin.listener.SoupListener;
-import ch.lepinat.shervin.main.Config;
 import ch.lepinat.shervin.main.TimeFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -16,11 +13,12 @@ public class GetFlyTime implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
+            String uuid = p.getUniqueId().toString();
             if (args.length == 0) {
-                if (SoupListener.flyingPlayers.containsKey(p.getUniqueId().toString())) {
+                if (SoupListener.flyingPlayers.containsKey(uuid)) {
                     try {
-                        p.sendMessage("§aDu kannst noch " + TimeFormatter.format(Config.getTimer(p.getUniqueId()), 'a') + " §afliegen§7.");
-                    } catch (LeftException | isNullException e) {
+                        p.sendMessage("§aDu kannst noch " + TimeFormatter.format(SoupListener.flyingPlayers.get(uuid).getTimer(), 'a') + " §afliegen§7.");
+                    } catch (Exception e) {
                         p.sendMessage("§cFehler");
                     }
                 } else {
@@ -31,11 +29,13 @@ public class GetFlyTime implements CommandExecutor {
                 if ((t = Bukkit.getPlayer(args[0])) != null) {
                     try {
                         if (SoupListener.flyingPlayers.containsKey(t.getUniqueId().toString())) {
-                            p.sendMessage("§aDer Spieler §6" + t.getName() + " §akann noch §6" + TimeFormatter.format(Config.getTimer(t.getUniqueId()), 'a') + " §afliegen§7.");
+                            p.sendMessage(
+                                "§aDer Spieler §6" + t.getName() + " §akann noch §6" + TimeFormatter.format(SoupListener.flyingPlayers.get(uuid).getTimer(),
+                                    'a') + " §afliegen§7.");
                         } else {
                             p.sendMessage("§cDer Spieler §l" + t.getName() + " §cist gerade nicht am fliegen§7.");
                         }
-                    } catch (LeftException | isNullException e) {
+                    } catch (Exception e) {
                         p.sendMessage("§cFehler");
                     }
                 } else {
