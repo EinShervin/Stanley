@@ -1,5 +1,6 @@
 package ch.lepinat.shervin.listener;
 
+import ch.lepinat.shervin.helper.FlySoupManager;
 import ch.lepinat.shervin.helper.Info;
 import ch.lepinat.shervin.main.Config;
 import net.kyori.adventure.text.Component;
@@ -27,12 +28,12 @@ public class LeftListener implements Listener {
 
         Info info;
         String uuid = p.getUniqueId().toString();
-        if ((info = SoupListener.flyingPlayers.get(uuid)) != null) {
-            SoupListener.flyingPlayers.remove(uuid);
+        if ((info = FlySoupManager.flyingPlayers.get(uuid)) != null) {
+            FlySoupManager.flyingPlayers.remove(uuid);
             try {
-                Config.setTimer(uuid, info.getTimer() / 1000);
-                System.out.println(info.getTimer());
-                System.out.println(info.getTimer() / 1000);
+                Config.setTimer(uuid, info.getTime());
+                System.out.println(info.getCountdown());
+                System.out.println(info.getCountdown() / 1000);
                 System.out.println(Instant.now().toEpochMilli());
             } catch (IOException ex) {
                 ex.printStackTrace();

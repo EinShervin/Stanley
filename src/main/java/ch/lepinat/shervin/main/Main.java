@@ -1,19 +1,15 @@
 package ch.lepinat.shervin.main;
 
-import java.io.IOException;
-
 import ch.lepinat.shervin.commands.*;
 import ch.lepinat.shervin.crafting.ChairRecipe;
-import ch.lepinat.shervin.exceptions.LeftException;
-import ch.lepinat.shervin.exceptions.isNullException;
+import ch.lepinat.shervin.crafting.FlySoup;
+import ch.lepinat.shervin.crafting.KnockBackStick;
 import ch.lepinat.shervin.listener.*;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ch.lepinat.shervin.crafting.FlySoup;
-import ch.lepinat.shervin.crafting.KnockBackStick;
+import java.io.IOException;
 
 public class Main extends JavaPlugin {
 
@@ -33,15 +29,6 @@ public class Main extends JavaPlugin {
         new ch.lepinat.shervin.crafting.Head().registerRecipes();
         new FlySoup().registerRecipes();
         new ChairRecipe().registerRecipes();
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            try {
-                long timer = Config.getTimer(p.getUniqueId().toString());
-                SoupListener soupListener = new SoupListener();
-                soupListener.flugTimer(p, timer / 1000);
-            } catch (Exception ignored) {
-            }
-        }
 
         getCommand("gm").setExecutor(new gameMode());
         getCommand("cc").setExecutor(new ClearChat());

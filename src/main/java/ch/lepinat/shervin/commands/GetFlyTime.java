@@ -1,5 +1,6 @@
 package ch.lepinat.shervin.commands;
 
+import ch.lepinat.shervin.helper.FlySoupManager;
 import ch.lepinat.shervin.listener.SoupListener;
 import ch.lepinat.shervin.main.TimeFormatter;
 import org.bukkit.Bukkit;
@@ -15,9 +16,9 @@ public class GetFlyTime implements CommandExecutor {
         if (sender instanceof Player p) {
             String uuid = p.getUniqueId().toString();
             if (args.length == 0) {
-                if (SoupListener.flyingPlayers.containsKey(uuid)) {
+                if (FlySoupManager.flyingPlayers.containsKey(uuid)) {
                     try {
-                        p.sendMessage("§aDu kannst noch " + TimeFormatter.format(SoupListener.flyingPlayers.get(uuid).getTimer(), 'a') + " §afliegen§7.");
+                        p.sendMessage("§aDu kannst noch " + TimeFormatter.format(FlySoupManager.flyingPlayers.get(uuid).getCountdown(), 'a') + " §afliegen§7.");
                     } catch (Exception e) {
                         p.sendMessage("§cFehler");
                     }
@@ -28,9 +29,9 @@ public class GetFlyTime implements CommandExecutor {
                 Player t;
                 if ((t = Bukkit.getPlayer(args[0])) != null) {
                     try {
-                        if (SoupListener.flyingPlayers.containsKey(t.getUniqueId().toString())) {
+                        if (FlySoupManager.flyingPlayers.containsKey(t.getUniqueId().toString())) {
                             p.sendMessage(
-                                "§aDer Spieler §6" + t.getName() + " §akann noch §6" + TimeFormatter.format(SoupListener.flyingPlayers.get(uuid).getTimer(),
+                                "§aDer Spieler §6" + t.getName() + " §akann noch §6" + TimeFormatter.format(FlySoupManager.flyingPlayers.get(uuid).getCountdown(),
                                     'a') + " §afliegen§7.");
                         } else {
                             p.sendMessage("§cDer Spieler §l" + t.getName() + " §cist gerade nicht am fliegen§7.");

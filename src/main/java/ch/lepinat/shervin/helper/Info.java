@@ -2,11 +2,11 @@ package ch.lepinat.shervin.helper;
 
 public class Info {
     private int taskId;
-    private long timer;
+    private long time;
 
-    public Info(int taskId, long timer) {
+    public Info(int taskId, long time) {
         this.taskId = taskId;
-        this.timer = timer;
+        this.time = time;
     }
 
     public int getTaskId() {
@@ -17,11 +17,11 @@ public class Info {
         this.taskId = taskId;
     }
 
-    public long getTimer() {
-        return timer;
+    public long getTime() {
+        return time;
     }
 
-    public void setTimer(long timer) {
-        this.timer = timer;
+    public void setTime(long time) {
+        this.time = time;
     }
 }

@@ -1,5 +1,6 @@
 package ch.lepinat.shervin.commands;
 
+import ch.lepinat.shervin.helper.FlySoupManager;
 import ch.lepinat.shervin.main.TimeFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -58,8 +59,7 @@ public class Fly implements CommandExecutor {
                             t.getPlayer().setFlying(true);
                             t.sendMessage("§6" + p.getName() + " §ahat dir fliegen für §6" + TimeFormatter.format(number * 1000L, 'a') + " §agegeben§7.");
                             p.sendMessage("§aDu hast §6" + t.getName() + " §afliegen gegeben für §6" + TimeFormatter.format(number * 1000L, 'a') + "§7.");
-                            SoupListener soupListener = new SoupListener();
-                            soupListener.flugTimer(t.getPlayer(), number);
+                            FlySoupManager.flugTimer(t.getPlayer(), number);
                         } else {
                             p.sendMessage("§cgib mal was richtiges ein. lost du kek");
                         }

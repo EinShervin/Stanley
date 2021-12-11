@@ -1,5 +1,6 @@
 package ch.lepinat.shervin.listener;
 
+import ch.lepinat.shervin.helper.FlySoupManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class JoinListener implements Listener {
     }
 
     private void flySoup(Player p) {
-        System.out.println(SoupListener.flyingPlayers.get(p.getUniqueId().toString()).getTimer());
+        System.out.println(FlySoupManager.flyingPlayers.get(p.getUniqueId().toString()).getCountdown());
         System.out.println(Instant.now().toEpochMilli());
     }
 }
