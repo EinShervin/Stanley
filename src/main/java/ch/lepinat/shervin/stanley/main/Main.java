@@ -1,19 +1,19 @@
 package ch.lepinat.shervin.stanley.main;
 
-import java.io.IOException;
-
-import ch.lepinat.shervin.stanley.crafting.ChairRecipe;
-import ch.lepinat.shervin.stanley.exceptions.LeftException;
-import ch.lepinat.shervin.stanley.exceptions.isNullException;
 import ch.lepinat.shervin.stanley.commands.*;
+import ch.lepinat.shervin.stanley.crafting.ChairRecipe;
 import ch.lepinat.shervin.stanley.crafting.FlySoup;
 import ch.lepinat.shervin.stanley.crafting.Head;
 import ch.lepinat.shervin.stanley.crafting.KnockBackStick;
+import ch.lepinat.shervin.stanley.exceptions.LeftException;
+import ch.lepinat.shervin.stanley.exceptions.isNullException;
 import ch.lepinat.shervin.stanley.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 
 public class Main extends JavaPlugin {
 
@@ -43,7 +43,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        getCommand("gm").setExecutor(new gameMode());
+        getCommand("gm").setExecutor(new GameMode());
         getCommand("cc").setExecutor(new ClearChat());
         getCommand("heal").setExecutor(new Heal());
         getCommand("fly").setExecutor(new Fly());

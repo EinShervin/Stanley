@@ -1,13 +1,12 @@
 package ch.lepinat.shervin.stanley.commands;
 
+import ch.lepinat.shervin.stanley.listener.SoupListener;
 import ch.lepinat.shervin.stanley.main.TimeFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import ch.lepinat.shervin.stanley.listener.SoupListener;
 import org.jetbrains.annotations.NotNull;
 
 public class Fly implements CommandExecutor {

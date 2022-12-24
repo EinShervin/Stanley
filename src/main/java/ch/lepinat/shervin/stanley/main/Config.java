@@ -1,11 +1,5 @@
 package ch.lepinat.shervin.stanley.main;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.Instant;
-import java.util.Date;
-import java.util.UUID;
-
 import ch.lepinat.shervin.stanley.exceptions.LeftException;
 import ch.lepinat.shervin.stanley.exceptions.isNullException;
 import net.kyori.adventure.text.Component;
@@ -13,6 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.UUID;
 
 public class Config extends JavaPlugin {
     private static final File ConfigFile = new File("plugins/Stanley", "config.yml");

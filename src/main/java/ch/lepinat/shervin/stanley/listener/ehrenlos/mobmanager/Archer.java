@@ -5,7 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Archer extends Mob {
     private final String name = "§3Archer";
