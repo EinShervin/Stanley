@@ -1,8 +1,8 @@
 name: Stanley
 version: 1.0
-author: Shervin Stanley Lepinat
+authors: [Shervin Stanley Lepinat, Mica Langkat]
 prefix: Stanley
-main: ch.lepinat.shervin.main.Main
+main: ch.lepinat.shervin.stanley.main.Main
 api-version: 1.18
 
 commands:
