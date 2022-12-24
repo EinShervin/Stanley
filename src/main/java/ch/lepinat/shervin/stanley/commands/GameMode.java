@@ -34,7 +34,7 @@ public class GameMode implements CommandExecutor {
         } else if (args.length == 2) {
             Player t = Bukkit.getPlayer(getPlayerString(args));
             if (t == null) {
-                p.sendMessage("§cDer Spieler §7§l" + args[1] + " §cist nicht auf diesem Server Online§7.");
+                p.sendMessage("§cDer Spieler §7§l" + getPlayerString(args) + " §cist nicht auf diesem Server Online§7.");
                 return false;
             }
             t.setGameMode(getGameModeByNum(num));
