@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
 
-public class Head {
+public class HeadCrafting {
 
     public void registerRecipes() {
         ShapedRecipe headRecipe = new ShapedRecipe(NamespacedKey.minecraft("head"), Items.createHead());

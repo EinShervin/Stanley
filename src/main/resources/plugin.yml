@@ -44,3 +44,5 @@ commands:
       description: ok
    burn:
       description: datapack ersatz du hurensohn
+   recipes:
+      description: Zeigt alles neuen Rezepte an.

@@ -1,15 +1,20 @@
 package ch.lepinat.shervin.stanley.helper;
 
+import ch.lepinat.shervin.stanley.crafting.InvisibleItemFrame;
+import ch.lepinat.shervin.stanley.main.Main;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
+import javax.print.attribute.Attribute;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,5 +84,31 @@ public class Items {
         meta.lore(lore);
         knockBackStick.setItemMeta(meta);
         return knockBackStick;
+    }
+
+    public static ItemStack getLightSource(){
+        ItemStack LightSource = new ItemStack(Material.LIGHT);
+        ItemMeta meta = LightSource.getItemMeta();
+        meta.displayName(Component.text("§2Light Source"));
+        List<Component> lore = new ArrayList<>();
+        lore.add(Component.text("Erzeugt unsichtbare Lichtquelle!"));
+        lore.add(Component.text("LightSource in der Hand halten um andere anzuzeigen."));
+        lore.add(Component.text("LightSource entfernen, indem ein Block hineingesetzt wird!"));
+        meta.lore(lore);
+        LightSource.setItemMeta(meta);
+        return LightSource;
+    }
+
+    public static ItemStack getInvisibleItemFrame(){
+        ItemStack InvisibleItemFrame = new ItemStack(Material.ITEM_FRAME);
+        ItemMeta meta = InvisibleItemFrame.getItemMeta();
+        GlowEnchant glow = new GlowEnchant(new NamespacedKey(Main.getPlugin(), "70"));
+        meta.displayName(Component.text("Invisible Item Frame"));
+        List<Component> lore = new ArrayList<>();
+        lore.add(Component.text("Ein unsichtbarer ItemFrame!"));
+        meta.lore(lore);
+        meta.addEnchant(glow, 1, true);
+        InvisibleItemFrame.setItemMeta(meta);
+        return InvisibleItemFrame;
     }
 }

@@ -1,19 +1,21 @@
 package ch.lepinat.shervin.stanley.main;
 
 import ch.lepinat.shervin.stanley.commands.*;
-import ch.lepinat.shervin.stanley.crafting.ChairRecipe;
-import ch.lepinat.shervin.stanley.crafting.FlySoup;
-import ch.lepinat.shervin.stanley.crafting.Head;
-import ch.lepinat.shervin.stanley.crafting.KnockBackStick;
+import ch.lepinat.shervin.stanley.commands.Head;
+import ch.lepinat.shervin.stanley.crafting.*;
 import ch.lepinat.shervin.stanley.exceptions.LeftException;
 import ch.lepinat.shervin.stanley.exceptions.isNullException;
+import ch.lepinat.shervin.stanley.helper.GlowEnchant;
 import ch.lepinat.shervin.stanley.listener.*;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class Main extends JavaPlugin {
 
@@ -29,10 +31,14 @@ public class Main extends JavaPlugin {
         }
         saveDefaultConfig();
 
+        registerGlowEnchantment();
+
         new KnockBackStick().registerRecipes();
-        new Head().registerRecipes();
+        new HeadCrafting().registerRecipes();
         new FlySoup().registerRecipes();
         new ChairRecipe().registerRecipes();
+        new LightSource().registerRecipes();
+        new InvisibleItemFrame().registerRecipes();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             try {
@@ -62,6 +68,7 @@ public class Main extends JavaPlugin {
         getCommand("stats").setExecutor(new Stats());
         getCommand("repair").setExecutor(new Repair());
         getCommand("burn").setExecutor(new Burn());
+        getCommand("recipes").setExecutor(new Recipes(this));
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
@@ -77,5 +84,25 @@ public class Main extends JavaPlugin {
 
     public static Main getPlugin() {
         return plugin;
+    }
+
+    public void registerGlowEnchantment(){
+        try {
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            GlowEnchant glow = new GlowEnchant(new NamespacedKey(this, "70"));
+            Enchantment.registerEnchantment(glow);
+        }
+        catch (IllegalArgumentException e){
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
