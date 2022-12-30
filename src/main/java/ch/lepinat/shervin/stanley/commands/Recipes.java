@@ -110,25 +110,18 @@ public class Recipes implements Listener, CommandExecutor {
 
         if (inventory == RecipeInventory) {
             event.setCancelled(true);
-            if(clicked.equals(Items.getLightSource())){
-                createRecipeInventory("LightSource", LightSourceList, Items.getLightSource());
-                player.openInventory(CraftingInventory);
-            }else if (clicked.equals(Items.getFlySoup())){
-                createRecipeInventory("FlySoup", FlySoupList, Items.getFlySoup());
-                player.openInventory(CraftingInventory);
-            }else if (clicked.equals(Items.getKnockBackStick())){
-                createRecipeInventory("KnockBackStick", KnockbackStickList, Items.getKnockBackStick());
-                player.openInventory(CraftingInventory);
-            }else if (clicked.equals(Items.createHead())){
-                createRecipeInventory("Head", HeadList, Items.createHead());
-                player.openInventory(CraftingInventory);
-            }else if (clicked.equals(Items.getChair())){
-                createRecipeInventory("Chair", ChairList, Items.getChair());
-                player.openInventory(CraftingInventory);
-            }else if (clicked.equals(Items.getInvisibleItemFrame())){
-                createRecipeInventory("InvisibleItemFrame", LightSourceList, Items.getInvisibleItemFrame());
-                player.openInventory(CraftingInventory);
+            if (clicked == null) {
+                return;
             }
+            switch (clicked.getType()) {
+                case LIGHT -> createRecipeInventory("LightSource", LightSourceList, Items.getLightSource());
+                case POTION -> createRecipeInventory("FlySoup", FlySoupList, Items.getFlySoup());
+                case STICK -> createRecipeInventory("KnockBackStick", KnockbackStickList, Items.getKnockBackStick());
+                case PLAYER_HEAD -> createRecipeInventory("Head", HeadList, Items.createHead());
+                case PUFFERFISH_SPAWN_EGG -> createRecipeInventory("Chair", ChairList, Items.getChair());
+                case ITEM_FRAME -> createRecipeInventory("InvisibleItemFrame", LightSourceList, Items.getInvisibleItemFrame());
+            }
+            player.openInventory(CraftingInventory);
         }
         if (inventory == CraftingInventory){
             event.setCancelled(true);
