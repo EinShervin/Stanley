@@ -66,7 +66,7 @@ public class CreateMob {
             while (location.getBlock().getType() == Material.AIR) {
                 location.subtract(0, 1, 0);
             }
-            if (location.getBlock().getType() != Material.GRASS) {
+            if (location.getBlock().getType() != Material.GRASS_BLOCK) {
                 location.add(0, 1, 0);
             }
         }

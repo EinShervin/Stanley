@@ -15,10 +15,10 @@ public class ChairRecipe {
     public void registerRecipes() {
         ItemStack chair = Items.getChair();
         HashMap<String, Material> slabs = Items.getChairMaterials();
-        for (Map.Entry map : slabs.entrySet()) {
-            ShapelessRecipe recipe = new ShapelessRecipe(NamespacedKey.minecraft((String) map.getKey()), chair);
+        for (Map.Entry<String, Material> map : slabs.entrySet()) {
+            ShapelessRecipe recipe = new ShapelessRecipe(NamespacedKey.minecraft(map.getKey()), chair);
             recipe.addIngredient(1, Material.MINECART);
-            recipe.addIngredient(1, (Material) map.getValue());
+            recipe.addIngredient(1, map.getValue());
             Bukkit.addRecipe(recipe);
         }
     }

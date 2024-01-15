@@ -28,16 +28,18 @@ public class Fly implements CommandExecutor {
                 } else if (args.length == 1) {
                     if (Bukkit.getPlayer(args[0]) != null) {
                         Player t = Bukkit.getPlayer(args[0]);
-                        if (t.getAllowFlight()) {
-                            t.setAllowFlight(false);
-                            t.setFlying(false);
-                            t.sendMessage("§aDu kannst dank §b" + p.getName() + " §anicht mehr fliegen§7.");
-                            p.sendMessage("§aDu hast §b" + t.getName() + " §adie kraft des fliegens genommen§7.");
-                        } else {
-                            t.setAllowFlight(true);
-                            t.setFlying(true);
-                            t.sendMessage("§aDu kannst dank §b" + p.getName() + " §anun fliegen§7.");
-                            p.sendMessage("§aDu hast §b" + t.getName() + " §afliegen beigebracht§7.");
+                        if (t != null){
+                            if (t.getAllowFlight()) {
+                                t.setAllowFlight(false);
+                                t.setFlying(false);
+                                t.sendMessage("§aDu kannst dank §b" + p.getName() + " §anicht mehr fliegen§7.");
+                                p.sendMessage("§aDu hast §b" + t.getName() + " §adie kraft des fliegens genommen§7.");
+                            } else {
+                                t.setAllowFlight(true);
+                                t.setFlying(true);
+                                t.sendMessage("§aDu kannst dank §b" + p.getName() + " §anun fliegen§7.");
+                                p.sendMessage("§aDu hast §b" + t.getName() + " §afliegen beigebracht§7.");
+                            }
                         }
                     } else {
                         p.sendMessage("§cDer Spieler §7§l" + args[0] + " §cist nicht auf diesem Server Online§7.");

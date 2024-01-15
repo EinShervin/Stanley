@@ -39,9 +39,11 @@ public class Burn implements CommandExecutor {
 
                 for (ItemStack itemStack : Arrays.stream(p.getInventory().getContents())
                     .filter(itemStack -> itemStack != null && concreteTypes.containsKey(itemStack.getType())).toList()) {
-                    inventory.remove(itemStack);
-                    itemStack.setType(concreteTypes.get(itemStack.getType()));
-                    inventory.addItem(itemStack);
+                    if (itemStack != null){
+                        inventory.remove(itemStack);
+                        itemStack.setType(concreteTypes.get(itemStack.getType()));
+                        inventory.addItem(itemStack);
+                    }
                 }
             } else {
                 p.sendMessage("§cdu hs");

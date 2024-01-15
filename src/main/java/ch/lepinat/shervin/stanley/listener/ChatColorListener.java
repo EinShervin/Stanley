@@ -11,8 +11,8 @@ public class ChatColorListener implements Listener {
 
     @EventHandler
     public void ChatListener(AsyncPlayerChatEvent e) {
-        for (Map.Entry color: getAllColors().entrySet()) {
-            e.setMessage(e.getMessage().replaceAll((String) color.getKey(), (String) color.getValue()));
+        for (Map.Entry<String, String> color: getAllColors().entrySet()) {
+            e.setMessage(e.getMessage().replaceAll(color.getKey(), color.getValue()));
         }
     }
 

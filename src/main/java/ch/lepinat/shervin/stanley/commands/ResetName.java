@@ -14,7 +14,7 @@ public class ResetName implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (sender instanceof Player p) {
-            if (!p.getInventory().getItemInMainHand().getItemMeta().displayName().toString().equals("")) {
+            if (!p.getInventory().getItemInMainHand().getItemMeta().displayName().toString().isEmpty()) {
                 if (!p.getInventory().getItemInMainHand().getType().isAir()) {
                     if (p.getInventory().contains(Material.EMERALD, 2) || p.getUniqueId().toString().equals("1378f00d-6a2a-45cb-8de9-56623f10be2a")) {
                         if (args.length == 0) {

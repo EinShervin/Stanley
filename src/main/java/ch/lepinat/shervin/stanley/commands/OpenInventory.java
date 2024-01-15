@@ -1,5 +1,6 @@
 package ch.lepinat.shervin.stanley.commands;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +18,7 @@ public class OpenInventory implements CommandExecutor {
                 if (args.length == 1) {
                     Player t;
                     if ((t = Bukkit.getPlayer(args[0])) != null) {
-                        Inventory inv = Bukkit.createInventory(t, InventoryType.PLAYER, t.getName());
+                        Inventory inv = Bukkit.createInventory(t, InventoryType.PLAYER, Component.text(t.getName()));
                         inv.setContents(t.getInventory().getContents());
                         p.openInventory(inv);
                     } else {
