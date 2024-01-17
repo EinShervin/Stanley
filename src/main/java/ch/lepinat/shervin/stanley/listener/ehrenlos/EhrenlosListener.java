@@ -45,12 +45,7 @@ public class EhrenlosListener implements Listener {
                         p.sendMessage("§aNur noch §6" + list.get(p.getUniqueId()).size() + " §aMobs§7.");
                     }
                 } else {
-                    list.values().forEach(arrayList -> {
-                        if (arrayList.contains(entity)) {
-                            arrayList.remove(entity);
-                            return;
-                        }
-                    });
+                    list.values().forEach(arrayList -> arrayList.remove(entity));
                 }
             }
         }
@@ -96,23 +91,23 @@ public class EhrenlosListener implements Listener {
 
     public static Material[] randomarmor(HashMap<Difficulty, Material[]> map, Difficulty difficulty) {
         HashMap<Difficulty, Material[]> list = new HashMap<>();
-        for (Map.Entry entry : map.entrySet()) {
+        for (Map.Entry<Difficulty, Material[]> entry : map.entrySet()) {
             if (entry.getKey() == difficulty) {
-                list.put((Difficulty) entry.getKey(), (Material[]) entry.getValue());
+                list.put(entry.getKey(), entry.getValue());
             }
         }
-        List value = new ArrayList(list.values());
-        return (Material[]) value.get((int) (Math.random() * (value.size() - 1)));
+        List<Material[]> value = new ArrayList<>(list.values());
+        return value.get((int) (Math.random() * (value.size() - 1)));
     }
 
     public static Material randomweapon(HashMap<Difficulty, Material> map, Difficulty difficulty) {
         HashMap<Difficulty, Material> list = new HashMap<>();
-        for (Map.Entry entry : map.entrySet()) {
+        for (Map.Entry<Difficulty, Material> entry : map.entrySet()) {
             if (entry.getKey() == difficulty) {
-                list.put((Difficulty) entry.getKey(), (Material) entry.getValue());
+                list.put(entry.getKey(), entry.getValue());
             }
         }
-        List value = new ArrayList(list.values());
-        return (Material) value.get((int) (Math.random() * (value.size() - 1)));
+        List<Material> value = new ArrayList<>(list.values());
+        return value.get((int) (Math.random() * (value.size() - 1)));
     }
 }

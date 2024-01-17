@@ -9,11 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class SetItemName implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
         if (sender instanceof Player p) {
             if (!p.getInventory().getItemInMainHand().getType().isAir()) {
@@ -30,7 +31,7 @@ public class SetItemName implements CommandExecutor {
                         p.sendMessage("§aDu hast deinem Item einen §4R§6a§en§ad§9o§dm §aNamen gegeben§7.");
                     } else {
                         p.getInventory().removeItem(new ItemStack(Material.EMERALD, 5));
-                        String Nachricht = convertObjectArrayToString(args, " ");
+                        String Nachricht = convertObjectArrayToString(args);
                         ItemMeta.displayName(Component.text(ChatColor.translateAlternateColorCodes('&', Nachricht)));
                         p.getInventory().getItemInMainHand().setItemMeta(ItemMeta);
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "§aDu hast dein Item zu §r" + Nachricht + " §abenannt§7."));
@@ -47,10 +48,10 @@ public class SetItemName implements CommandExecutor {
         return false;
     }
 
-    private static String convertObjectArrayToString(Object[] arr, String delimiter) {
+    private static String convertObjectArrayToString(Object[] arr) {
         StringBuilder sb = new StringBuilder();
         for (Object obj : arr)
-            sb.append(obj.toString()).append(delimiter);
+            sb.append(obj.toString()).append(" ");
         return sb.substring(0, sb.length() - 1);
 
     }

@@ -19,6 +19,10 @@ public class GameMode implements CommandExecutor {
             p.sendMessage("§cDu hast dazu keine Rechte§7.");
             return false;
         }
+        if (args.length == 0) {
+            p.sendMessage("§cCommand nicht komplett!");
+            return false;
+        }
         Integer num = getCommandNum(args);
         if (num == null) {
             p.sendMessage("§cVallah kein Zahl§7, §ckannst du nichtmal schreiben ODER WAS§7.");

@@ -25,7 +25,7 @@ public class ChangeAuthor implements CommandExecutor {
                                 if (args.length == 1) {
                                     bookMeta.setAuthor(args[0]);
                                 } else {
-                                    bookMeta.setAuthor(convertObjectArrayToString(args, " "));
+                                    bookMeta.setAuthor(convertObjectArrayToString(args));
                                 }
                                 p.getInventory().getItemInMainHand().setItemMeta(bookMeta);
                             } else {
@@ -49,10 +49,10 @@ public class ChangeAuthor implements CommandExecutor {
         return false;
     }
 
-    private static String convertObjectArrayToString(Object[] arr, String delimiter) {
+    private static String convertObjectArrayToString(Object[] arr) {
         StringBuilder sb = new StringBuilder();
         for (Object obj : arr)
-            sb.append(obj.toString()).append(delimiter);
+            sb.append(obj.toString()).append(" ");
         return sb.substring(0, sb.length() - 1);
 
     }

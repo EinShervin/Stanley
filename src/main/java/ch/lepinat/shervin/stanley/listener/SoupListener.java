@@ -23,7 +23,6 @@ public class SoupListener implements Listener {
     public static HashMap<String, Integer> flyingPlayers = new HashMap<>();
 
     public void flugTimer(Player p, long timer) {
-
         long startTime;
         try {
             startTime = Config.setTimer(p.getUniqueId(), timer);
@@ -39,7 +38,7 @@ public class SoupListener implements Listener {
             @Override
             public void run() {
                 if (countdown == 0) {
-                    flyingPlayers.remove(p.getUniqueId());
+                    flyingPlayers.remove(p.getUniqueId().toString());
 
                     p.sendMessage("§cDu kannst nicht mehr fliegen§7.");
                     p.setAllowFlight(false);
